@@ -30,7 +30,7 @@ class ItemDetail extends React.Component {
 
     render() {
         return(
-            <div >
+            <div>
                 {
                     this.state.items.filter((item) => item.id === this.state.prodID)
                     .map(({id, ...otherProps }) => (

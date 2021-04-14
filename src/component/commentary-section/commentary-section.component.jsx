@@ -18,17 +18,31 @@ class CommentarySection extends React.Component {
     }
     componentDidMount(){
         const URL2 = 'http://localhost/blissim/api/?do=get_commentaries';
-       axios.get(URL2, {
-        params: {
-            prodID: this.state.prodID
-        }
-       })
-       .then(res => res.data)
-       .then(
-           (result) => {
-               this.setState({commentaries: result});
-           }
-       )
+        axios.get(URL2, {
+            params: {
+                prodID: this.state.prodID
+            }
+        })
+        .then(res => res.data)
+        .then(
+            (result) => {
+                this.setState({commentaries: result});
+            }
+        )
+    }
+    componentDidUpdate(){
+        const URL2 = 'http://localhost/blissim/api/?do=get_commentaries';
+        axios.get(URL2, {
+            params: {
+                prodID: this.state.prodID
+            }
+        })
+        .then(res => res.data)
+        .then(
+            (result) => {
+                this.setState({commentaries: result});
+            }
+        )
     }
     handleSubmit = event => {
         event.preventDefault();
@@ -52,6 +66,7 @@ class CommentarySection extends React.Component {
     handleChange = event => {
         this.setState({comment: event.target.value});
     }
+
     render() {
         return (
             <div className="commentary-form ">
@@ -62,8 +77,8 @@ class CommentarySection extends React.Component {
                 <div className="commentary-div ">
                 <h1>Commentaires</h1>
                 {
-                    this.state.commentaries.map(({id, ...commentProps}) => (
-                        <CommentaryList key={id} {...commentProps} />
+                    this.state.commentaries.map(({commentID, ...commentProps}) => (
+                        <CommentaryList key={commentID} {...commentProps} />
                     ))
                 }
                 </div>          
