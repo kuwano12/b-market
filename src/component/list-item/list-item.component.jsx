@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import MenuItem from '../menu-item/item.component';
+import Item from '../item/item.component';
 import './list-item.styles.scss';
 
 class ListItem extends React.Component {
@@ -25,7 +25,7 @@ class ListItem extends React.Component {
             <div className="row">
                 {
                     this.state.products.map(({id, ...otherProps}) => (
-                        <MenuItem key={id} {...otherProps} />
+                        <Item key={id} {...otherProps} id={id} />
                     ))
                 }
             </div>
