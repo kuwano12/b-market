@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './homepage.styles.scss';
-import ListItem from '../component/list-item/list-item.component';
-import {SearchBox} from '../component/search-box/search-box.component';
+import ListItem from '../../component/list-item/list-item.component';
+import {SearchBox} from '../../component/search-box/search-box.component';
 import axios from 'axios';
 
 
 class Homepage extends Component {
 
     componentDidMount(){
-        const url = 'http://localhost/blissim/api.php';
+        const url = 'http://localhost/blissim/api/?do=get_fake_data';
         axios.get(url)
         .then(res => res.data)
         .then(
@@ -17,6 +17,7 @@ class Homepage extends Component {
         }
        );
     }
+
     constructor(){
         super();
         this.state = {
@@ -24,9 +25,11 @@ class Homepage extends Component {
             searchField: ''
         }
     }
+
     handleChange = (e) => { 
         this.setState({ searchField: e.target.value });
     }
+
     render() {
         const { products, searchField } = this.state;
         const filteredList = products.filter(item => 
@@ -34,8 +37,8 @@ class Homepage extends Component {
             return(
             <div>
                 <SearchBox 
-                placeholder="Rechercher un produit" 
-                handleChange = {this.handleChange}/>
+                    placeholder="Rechercher un produit" 
+                    handleChange = {this.handleChange}/>
                 <ListItem products = {filteredList}/>
             </div>
             )

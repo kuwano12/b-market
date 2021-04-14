@@ -9,7 +9,7 @@ const Header = () => (
             Homepage
         </Link>
         <div className="options">
-            <Link className="option" to="/shop">
+            <Link className="option" to="/admin">
                 ADMIN
             </Link>
         </div>

@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import ItemDetail from "./component/item-detail/item-detail.component";
-import Homepage from './homepage/homepage.component';
+import Homepage from './page/homepage/homepage.component';
 import Header from './component/header/header.component';
 
 function App() {
