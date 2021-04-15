@@ -5,45 +5,44 @@ import CommentaryList from '../commentary-list/commentary-list.component';
 import CommentaryForm from '../commentary-form/commentary-form.component';
 
 
-
 class CommentarySection extends React.Component {
+    _isMounted = false;
     constructor(props){
         super(props);
         this.state = {
             comment: props.comment,
             prodID: props.prodID,
             commentaries: [],
+            flag: false
 
         };
     }
     componentDidMount(){
-        const URL2 = 'http://localhost/blissim/api/?do=get_commentaries';
-        axios.get(URL2, {
-            params: {
-                prodID: this.state.prodID
-            }
-        })
-        .then(res => res.data)
-        .then(
-            (result) => {
-                this.setState({commentaries: result});
-            }
-        )
+        this._isMounted = true;
+        this.get_comments();
     }
-    componentDidUpdate(){
+
+    get_comments(){
         const URL2 = 'http://localhost/blissim/api/?do=get_commentaries';
-        axios.get(URL2, {
-            params: {
-                prodID: this.state.prodID
-            }
-        })
-        .then(res => res.data)
-        .then(
-            (result) => {
-                this.setState({commentaries: result});
-            }
-        )
+            axios.get(URL2, {
+                params: {
+                    prodID: this.state.prodID
+                }
+            })
+            .then(res => res.data)
+            .then(
+                (result) => {
+                    this.setState({commentaries: result});
+                }
+            )
     }
+
+    componentWillUnmount() {
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     handleSubmit = event => {
         event.preventDefault();
         
@@ -59,12 +58,52 @@ class CommentarySection extends React.Component {
         .then(
            (result) => {
             this.setState({comment: ''});
+            this.get_comments()
+            console.log(this.state.commentaries);
+            this._isMounted = true;
         }
        );
     }
 
     handleChange = event => {
         this.setState({comment: event.target.value});
+    }
+
+    deleteComment = (id) => {
+        const URL = 'http://localhost/blissim/api/?do=delete_commentaries';
+        axios.get(URL, {
+            params: {
+                commentID: id,
+            }
+        })
+        .then(res => res.data)
+        .then(
+           (result) => {
+            const com = this.state.commentaries.filter((comment) => comment.commentID !== id);
+            this.setState({commentaries: com});     
+        }
+       );
+    }
+
+    editComment = () => {
+        this.setState({flag: !this.state.flag})
+    } 
+
+    editCommentConf = (value, id) => {
+        const URL = 'http://localhost/blissim/api/?do=edit_commentaries';
+        axios.get(URL,{
+            params: {
+                commentID: id,
+                comment: value
+            }
+            })
+            .then(res => res.data)
+            .then(
+               (result) => {
+                this.get_comments();
+                this.setState({flag: false});
+            }
+           );
     }
 
     render() {
@@ -78,13 +117,20 @@ class CommentarySection extends React.Component {
                 <h1>Commentaires</h1>
                 {
                     this.state.commentaries.map(({commentID, ...commentProps}) => (
-                        <CommentaryList key={commentID} {...commentProps} />
+                        <CommentaryList 
+                            key={commentID} 
+                            {...commentProps} 
+                            commentID={commentID}
+                            flag={this.state.flag}
+                            editComment={this.editComment}
+                            deleteComment={this.deleteComment}
+                            editCommentConf={this.editCommentConf}
+                         />
                     ))
                 }
                 </div>          
             </div>
-            
-        )
+        );
     }
 }
 export default CommentarySection;

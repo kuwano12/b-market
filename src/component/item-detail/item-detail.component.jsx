@@ -7,15 +7,13 @@ import CommentarySection from '../commentary-section/commentary-section.componen
 class ItemDetail extends React.Component {
     componentDidMount(){
         const URL = 'http://localhost/blissim/api/?do=get_fake_data';
-
-        axios.get(URL, {})
+        axios.get(URL)
         .then(res => res.data)
         .then(
            (result) => {
             this.setState({items: JSON.parse(result)});
         }
-       );
-       
+       )
     }
 
     constructor() {
@@ -37,11 +35,10 @@ class ItemDetail extends React.Component {
                         <Detail key={id} {...otherProps} />                 
                     ))             
                 }
-                <CommentarySection prodID={this.state.prodID} />
-                
-                
+                <CommentarySection prodID={this.state.prodID} />   
             </div>
         );  
     }  
 }
 export default ItemDetail;
+
