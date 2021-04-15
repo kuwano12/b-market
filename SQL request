@@ -1,0 +1,14 @@
+    Requet 1:
+    SELECT DISTINCT name, firstname from customer 
+    join orders ON customer.customerID = orders.customerID 
+    join orderdetail on orders.orderID = orderdetail.orderID 
+    WHERE orderdetail.productID = '1'
+
+    Requet 2:
+    SELECT DISTINCT prodName, COUNT(qt) FROM product 
+    JOIN orderdetail ON product.productID = orderdetail.productID
+    JOIN orders ON orderdetail.orderID = orders.orderID
+    WHERE DATE(orders.orderDate) > (NOW() - INTERVAL 30 DAY)
+    GROUP BY prodName
+
+    Ces 2 requêtes ont été implémentées dans l'interface ADMIN du projet.
