@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Header = () => (
     <div className='header'>
         <Link to="/">
-            Homepage
+            Liste des articles
         </Link>
         <div className="options">
             <Link className="option" to="/admin">

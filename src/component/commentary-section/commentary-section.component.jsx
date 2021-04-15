@@ -59,7 +59,6 @@ class CommentarySection extends React.Component {
            (result) => {
             this.setState({comment: ''});
             this.get_comments()
-            console.log(this.state.commentaries);
             this._isMounted = true;
         }
        );
