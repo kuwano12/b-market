@@ -22,7 +22,6 @@ class AdminPage extends React.Component {
         .then(
             (result) => {
                 this.setState({productData: result});
-                console.log(this.state.productData);
             }
         )
     }
