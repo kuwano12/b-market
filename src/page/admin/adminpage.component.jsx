@@ -52,6 +52,7 @@ class AdminPage extends React.Component {
                  <div className="">
                     <label htmlFor="product_id">Entrer un ID de produit : </label>
                     <input 
+                        className="prodInput"
                         type="search" 
                         id="product_id" 
                         onChange={this.handleChange}

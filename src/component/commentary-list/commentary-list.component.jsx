@@ -31,11 +31,11 @@ class CommentaryList extends React.Component{
                         )
                     }
                 </div>
-                <Button variant="danger" onClick={() => this.props.deleteComment(this.props.commentID)}> X </Button>
-                <Button variant="warning" onClick={() => this.props.editComment() }> Edit </Button>
+                <Button variant="danger" onClick={() => this.props.deleteComment(this.props.commentID)}> Supprimer </Button>
+                <Button variant="warning" onClick={() => this.props.editComment() }> Modifier </Button>
                 {
                     this.props.flag ? (
-                        <Button variant="success" onClick={() => this.props.editCommentConf(this.state.commentValue, this.props.commentID)}> V </Button>
+                        <Button variant="success" onClick={() => this.props.editCommentConf(this.state.commentValue, this.props.commentID)}> Valider </Button>
                     ) : (
                         null
                     )

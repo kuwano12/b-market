@@ -47,21 +47,23 @@ class CommentarySection extends React.Component {
         event.preventDefault();
         
         const url = 'http://localhost/blissim/api/?do=add_commentary';
-
-        axios.get(url, {
-            params: {
-                comment: this.state.comment,
-                prodID: this.state.prodID
+        if(this.state.comment){
+            axios.get(url, {
+                params: {
+                    comment: this.state.comment,
+                    prodID: this.state.prodID
+                }
+            })
+            .then(res => res.data)
+            .then(
+               (result) => {
+                this.setState({comment: ''});
+                this.get_comments()
+                this._isMounted = true;
             }
-        })
-        .then(res => res.data)
-        .then(
-           (result) => {
-            this.setState({comment: ''});
-            this.get_comments()
-            this._isMounted = true;
+           );
         }
-       );
+        
     }
 
     handleChange = event => {
@@ -90,19 +92,21 @@ class CommentarySection extends React.Component {
 
     editCommentConf = (value, id) => {
         const URL = 'http://localhost/blissim/api/?do=edit_commentaries';
-        axios.get(URL,{
-            params: {
-                commentID: id,
-                comment: value
-            }
-            })
-            .then(res => res.data)
-            .then(
-               (result) => {
-                this.get_comments();
-                this.setState({flag: false});
-            }
-           );
+        if(value && id ){
+            axios.get(URL,{
+                params: {
+                    commentID: id,
+                    comment: value
+                }
+                })
+                .then(res => res.data)
+                .then(
+                   (result) => {
+                    this.get_comments();
+                    this.setState({flag: false});
+                }
+               );
+        }
     }
 
     render() {
