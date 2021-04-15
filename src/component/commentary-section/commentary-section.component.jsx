@@ -23,7 +23,7 @@ class CommentarySection extends React.Component {
     }
 
     get_comments(){
-        const URL2 = 'http://localhost/blissim/api/?do=get_commentaries';
+        const URL2 = 'http://localhost/backend/api/?do=get_commentaries';
             axios.get(URL2, {
                 params: {
                     prodID: this.state.prodID
@@ -46,7 +46,7 @@ class CommentarySection extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         
-        const url = 'http://localhost/blissim/api/?do=add_commentary';
+        const url = 'http://localhost/backend/api/?do=add_commentary';
         if(this.state.comment){
             axios.get(url, {
                 params: {
@@ -71,7 +71,7 @@ class CommentarySection extends React.Component {
     }
 
     deleteComment = (id) => {
-        const URL = 'http://localhost/blissim/api/?do=delete_commentaries';
+        const URL = 'http://localhost/backend/api/?do=delete_commentaries';
         axios.get(URL, {
             params: {
                 commentID: id,
@@ -91,7 +91,7 @@ class CommentarySection extends React.Component {
     } 
 
     editCommentConf = (value, id) => {
-        const URL = 'http://localhost/blissim/api/?do=edit_commentaries';
+        const URL = 'http://localhost/backend/api/?do=edit_commentaries';
         if(value && id ){
             axios.get(URL,{
                 params: {

@@ -8,7 +8,7 @@ import axios from 'axios';
 class Homepage extends Component {
 
     componentDidMount(){
-        const url = 'http://localhost/blissim/api/?do=get_fake_data';
+        const url = 'http://localhost/backend/api/?do=get_fake_data';
         axios.get(url)
         .then(res => res.data)
         .then(

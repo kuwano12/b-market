@@ -6,7 +6,7 @@ import CommentarySection from '../commentary-section/commentary-section.componen
 
 class ItemDetail extends React.Component {
     componentDidMount(){
-        const URL = 'http://localhost/blissim/api/?do=get_fake_data';
+        const URL = 'http://localhost/backend/api/?do=get_fake_data';
         axios.get(URL)
         .then(res => res.data)
         .then(

@@ -16,7 +16,7 @@ class AdminPage extends React.Component {
     }
 
     componentDidMount(){
-        const URL = 'http://localhost/blissim/api/?do=get_product_sales';
+        const URL = 'http://localhost/backend/api/?do=get_product_sales';
         axios.get(URL)
         .then(res => res.data)
         .then(
@@ -27,7 +27,7 @@ class AdminPage extends React.Component {
     }
 
     getClientList = event => {
-        const URL = 'http://localhost/blissim/api/?do=get_client_by_idproduct';
+        const URL = 'http://localhost/backend/api/?do=get_client_by_idproduct';
             axios.get(URL, {
                 params: {
                     prodID: this.state.prodID
@@ -63,7 +63,6 @@ class AdminPage extends React.Component {
                             <Table striped bordered hover>
                                 <thead>
                                     <tr>
-                                        <th>Nom client</th>
                                         <th>Nom client</th>
                                         <th>Prénom client</th>
                                     </tr> 
