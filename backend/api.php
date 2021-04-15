@@ -21,18 +21,21 @@ function get_fake_data(){
 }
 
 function add_commentary($commentary) {
-    try{
-        $db = connect_to_db();
-        $stmt = $db -> prepare("INSERT INTO `commentary`(`productID`, `comment`, `date`) 
-        VALUES (:prodID, :commentary, '".date("Y-m-d H:i:s")."')");
-        
-        $stmt->bindParam(':prodID', $commentary["prodID"]);
-        $stmt->bindParam(':commentary', $commentary["comment"]);
-        $stmt->execute();
-    }catch(PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
+    if(strlen($commentary["comment"]) > 0){
+        try{
+            $db = connect_to_db();
+            $stmt = $db -> prepare("INSERT INTO `commentary`(`productID`, `comment`, `date`) 
+            VALUES (:prodID, :commentary, '".date("Y-m-d H:i:s")."')");
+            
+            $stmt->bindParam(':prodID', $commentary["prodID"]);
+            $stmt->bindParam(':commentary', $commentary["comment"]);
+            $stmt->execute();
+        }catch(PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
+        $db = null;
     }
-    $db = null;
+    
 }
 
 function get_commentaries($productID) {
@@ -62,19 +65,22 @@ function delete_commentaries($comID){
 }
 
 function edit_commentaries($comment){
-    try{
-        $newDate = date("Y-m-d H:i:s");
-        $db = connect_to_db();
-        $sql = "UPDATE `commentary` SET `comment`=:comment,`date`=:Ndate WHERE commentID=:commentID";
-        $stmt = $db -> prepare($sql);
-        $stmt->bindParam(':comment', $comment["comment"]);
-        $stmt->bindParam(':Ndate', $newDate);
-        $stmt->bindParam(':commentID', $comment["commentID"]);
-        $stmt->execute();
-    }catch(PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
+    if(strlen($comment["comment"]) > 0){
+
+        try{
+            $newDate = date("Y-m-d H:i:s");
+            $db = connect_to_db();
+            $sql = "UPDATE `commentary` SET `comment`=:comment,`date`=:Ndate WHERE commentID=:commentID";
+            $stmt = $db -> prepare($sql);
+            $stmt->bindParam(':comment', $comment["comment"]);
+            $stmt->bindParam(':Ndate', $newDate);
+            $stmt->bindParam(':commentID', $comment["commentID"]);
+            $stmt->execute();
+        }catch(PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
+        $db = null;
     }
-    $db = null;
 }
 
 function get_client_by_idproduct($productData){
