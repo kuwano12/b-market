@@ -107,10 +107,10 @@ function get_product_sales() {
         $stmt = $db -> query("SELECT DISTINCT prodName, COUNT(qt) as count FROM product 
         JOIN orderdetail ON product.productID = orderdetail.productID
         JOIN orders ON orderdetail.orderID = orders.orderID
-        WHERE DATE(orders.orderDate) > (NOW() - INTERVAL 30 DAY)
+        WHERE DATE(orders.orderDate) > (NOW() - INTERVAL 7 DAY)
         GROUP BY prodName");
 
-        $stmt-> execute();
+        $stmt -> execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
     }catch(PDOException $e){
