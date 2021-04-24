@@ -41,7 +41,7 @@ class SignIn extends React.Component {
                     </div>
                     <div>
                         <label htmlFor="password">Mot de passe</label>
-                        <input id="password" name="password" onChange={this.handleChange} />
+                        <input type="password" id="password" name="password" onChange={this.handleChange} />
                     </div>
                     <div>
                         <Button type="submit" variant="primary">Connexion</Button>
